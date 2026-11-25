@@ -10,15 +10,15 @@ use rand::RngCore;
 use crate::directories::LauncherDirectories;
 
 pub async fn check_for_updates(http_client: reqwest::Client, send: FrontendHandle) {
-    if option_env!("PANDORA_UPDATE_PUBKEY").is_none() {
+    if option_env!("GRAVE_UPDATE_PUBKEY").is_none() {
         return;
     }
 
-    let Some(version) = option_env!("PANDORA_RELEASE_VERSION") else {
-        log::warn!("Skipping update check because PANDORA_RELEASE_VERSION isn't set");
+    let Some(version) = option_env!("GRAVE_RELEASE_VERSION") else {
+        log::warn!("Skipping update check because GRAVE_RELEASE_VERSION isn't set");
 
         #[cfg(not(debug_assertions))] // Don't show error in non-release builds
-        send.send_warning("Unable to check for updates, missing PANDORA_RELEASE_VERSION");
+        send.send_warning("Unable to check for updates, missing GRAVE_RELEASE_VERSION");
         return;
     };
 
@@ -39,13 +39,13 @@ pub async fn check_for_updates(http_client: reqwest::Client, send: FrontendHandl
         Ok(response) => response,
         Err(err) => {
             log::error!("Error while requesting update manifest: {}", err);
-            send.send_error("Unable to fetch Pandora update manifest, see logs for more details");
+            send.send_error("Unable to fetch GraveLauncher update manifest, see logs for more details");
             return;
         },
     };
 
     if response.status() != StatusCode::OK {
-        send.send_error(format!("Unable to fetch Pandora update manifest, non-200 status code: {}", response.status()));
+        send.send_error(format!("Unable to fetch GraveLauncher update manifest, non-200 status code: {}", response.status()));
         return;
     }
 
@@ -53,7 +53,7 @@ pub async fn check_for_updates(http_client: reqwest::Client, send: FrontendHandl
         Ok(manifest_bytes) => manifest_bytes,
         Err(err) => {
             log::error!("Error while downloading update manifest: {}", err);
-            send.send_error("Unable to download Pandora update manifest, see logs for more details");
+            send.send_error("Unable to download GraveLauncher update manifest, see logs for more details");
             return;
         },
     };
@@ -70,7 +70,7 @@ pub async fn check_for_updates(http_client: reqwest::Client, send: FrontendHandl
     let update_version = schema::forge::VersionFragment::string_to_parts(&manifest.version);
 
     if current_version >= update_version {
-        log::info!("Pandora is up-to-date");
+        log::info!("GraveLauncher is up-to-date");
         return;
     }
 
@@ -150,7 +150,7 @@ pub async fn install_update(http_client: reqwest::Client, dirs: Arc<LauncherDire
 }
 
 async fn install_update_inner(http_client: reqwest::Client, dirs: &LauncherDirectories, send: FrontendHandle, update: UpdatePrompt, modal_action: ModalAction) -> Result<(), Arc<str>> {
-    let title = format!("Downloading Pandora {}", update.new_version);
+    let title = format!("Downloading GraveLauncher {}", update.new_version);
     let tracker = modal_action.push_tracker(title.into());
 
     let mut expected_hash = [0u8; 20];
@@ -190,8 +190,8 @@ async fn install_update_inner(http_client: reqwest::Client, dirs: &LauncherDirec
         return Err("Hash of downloaded file does not match".into());
     }
 
-    let Some(pubkey) = option_env!("PANDORA_UPDATE_PUBKEY") else {
-        return Err("Unable to update, missing PANDORA_UPDATE_PUBKEY at compile time".into());
+    let Some(pubkey) = option_env!("GRAVE_UPDATE_PUBKEY") else {
+        return Err("Unable to update, missing GRAVE_UPDATE_PUBKEY at compile time".into());
     };
 
     let pubkey = base64::engine::general_purpose::STANDARD.decode(pubkey).unwrap();
@@ -263,7 +263,7 @@ async fn install_update_inner(http_client: reqwest::Client, dirs: &LauncherDirec
         },
     }
 
-    send.send_success("Pandora update successful. Restart to apply changes");
+    send.send_success("GraveLauncher update successful. Restart to apply changes");
 
     Ok(())
 }

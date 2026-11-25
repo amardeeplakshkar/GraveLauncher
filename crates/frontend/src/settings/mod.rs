@@ -163,7 +163,7 @@ impl SettingsRoot {
 
 impl Render for SettingsRoot {
     fn render(&mut self, _window: &mut Window, cx: &mut Context<Self>) -> impl IntoElement {
-        let version = option_env!("PANDORA_RELEASE_VERSION").unwrap_or("Dev");
+        let version = option_env!("GRAVE_RELEASE_VERSION").unwrap_or("Dev");
         let version_string = if let Some(git_rev) = option_env!("GIT_REVISION") {
             SharedString::new(format!("{} ({})", version, git_rev))
         } else {

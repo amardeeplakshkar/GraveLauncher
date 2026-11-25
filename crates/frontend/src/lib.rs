@@ -203,10 +203,10 @@ pub fn open_main_window(data: &DataEntities, cx: &mut App) -> AnyWindowHandle {
     crate::root::set_should_render_custom_titlebar(use_custom_titlebar);
     let handle = cx.open_window(
         WindowOptions {
-            app_id: Some("PandoraLauncher".into()),
+            app_id: Some("GraveLauncher".into()),
             window_min_size: Some(size(px(480.0), px(270.0))),
             titlebar: Some(TitlebarOptions {
-                title: Some("Pandora Launcher".into()),
+                title: Some("GraveLauncher".into()),
                 appears_transparent: use_custom_titlebar,
                 ..Default::default()
             }),

@@ -405,7 +405,7 @@ pub fn show_modal(
         app_owns_titlebar_drag: true,
         is_resizable: false,
         is_minimizable: false,
-        app_id: Some("PandoraLauncher".into()),
+        app_id: Some("GraveLauncher".into()),
         window_decorations: Some(WindowDecorations::Client),
         ..Default::default()
     }, move |window, cx| {

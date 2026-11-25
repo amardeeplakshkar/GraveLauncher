@@ -703,7 +703,7 @@ impl Render for LauncherUI {
                     open_bug_report_url(window, cx);
                 }
             });
-        let discord_invite = option_env!("DISCORD_INVITE").unwrap_or("https://pandora.moulberry.com/discord");
+        let discord_invite = option_env!("DISCORD_INVITE").unwrap_or("");
         let discord_button = div()
             .id("discord-button")
             .p_2()
@@ -796,8 +796,8 @@ fn open_bug_report_url(window: &mut Window, cx: &mut App) {
 "#);
 
     use std::fmt::Write;
-    _ = writeln!(&mut body, "Version: {:?}", option_env!("PANDORA_RELEASE_VERSION"));
-    _ = writeln!(&mut body, "Distributor: {:?}", option_env!("PANDORA_DISTRIBUTION"));
+    _ = writeln!(&mut body, "Version: {:?}", option_env!("GRAVE_RELEASE_VERSION"));
+    _ = writeln!(&mut body, "Distributor: {:?}", option_env!("GRAVE_DISTRIBUTION"));
     _ = writeln!(&mut body, "OS: {} ({})", std::env::consts::OS, std::env::consts::ARCH);
 
     if cfg!(target_os = "linux") {

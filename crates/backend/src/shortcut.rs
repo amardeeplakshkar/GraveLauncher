@@ -63,7 +63,7 @@ pub fn create_shortcut(mut path: PathBuf, name: &str, bin: &Path, args: &[&str])
     <key>CFBundleExecutable</key>
     <string>run.sh</string>
     <key>CFBundleIdentifier</key>
-    <string>com.moulberry.pandoralauncher.Shortcut</string>
+    <string>io.github.amardeeplakshkar.gravelauncher.Shortcut</string>
     <key>CFBundleName</key>
     <string>{name}</string>
     <key>CFBundleDisplayName</key>
