@@ -16,29 +16,29 @@
   <screenshots>
     <screenshot type="default">
       <caption>GraveLauncher with the instance settings open</caption>
-      <image type="source">https://raw.githubusercontent.com/amardeeplakshkar/PandoraLauncher/refs/heads/master/screenshots/instance.png</image>
+      <image type="source">https://raw.githubusercontent.com/amardeeplakshkar/GraveLauncher/refs/heads/master/screenshots/instance.png</image>
     </screenshot>
     <screenshot>
       <caption>two windows, the one infront shows the game's debug output</caption>
-      <image type="source">https://raw.githubusercontent.com/amardeeplakshkar/PandoraLauncher/refs/heads/master/screenshots/gameoutput.png</image>
+      <image type="source">https://raw.githubusercontent.com/amardeeplakshkar/GraveLauncher/refs/heads/master/screenshots/gameoutput.png</image>
     </screenshot>
     <screenshot>
       <caption>GraveLauncher has built in capability to browse and download content from modrinth</caption>
-      <image type="source">https://raw.githubusercontent.com/amardeeplakshkar/PandoraLauncher/refs/heads/master/screenshots/modrinth.png</image>
+      <image type="source">https://raw.githubusercontent.com/amardeeplakshkar/GraveLauncher/refs/heads/master/screenshots/modrinth.png</image>
     </screenshot>
     <screenshot>
       <caption>GraveLauncher supports syncing it's settings across multiple game instances</caption>
-      <image type="source">https://github.com/amardeeplakshkar/PandoraLauncher/blob/master/screenshots/syncing.png?raw=true</image>
+      <image type="source">https://github.com/amardeeplakshkar/GraveLauncher/blob/master/screenshots/syncing.png?raw=true</image>
     </screenshot>
   </screenshots>
   <releases>
     <release version="v2.5.0" date="2026-01-13" type="stable"/>
   </releases>
-  <url type="homepage">https://github.com/amardeeplakshkar/PandoraLauncher</url>
-  <url type="bugtracker">https://github.com/amardeeplakshkar/PandoraLauncher/issues</url>
-  <url type="faq">https://github.com/amardeeplakshkar/PandoraLauncher?tab=readme-ov-file#faq</url>
+  <url type="homepage">https://github.com/amardeeplakshkar/GraveLauncher</url>
+  <url type="bugtracker">https://github.com/amardeeplakshkar/GraveLauncher/issues</url>
+  <url type="faq">https://github.com/amardeeplakshkar/GraveLauncher?tab=readme-ov-file#faq</url>
   <url type="contact">https://github.com/amardeeplakshkar</url>
-  <url type="vcs-browser">https://github.com/amardeeplakshkar/PandoraLauncher</url>
+  <url type="vcs-browser">https://github.com/amardeeplakshkar/GraveLauncher</url>
   <requires>
     <internet>always</internet>
   </requires>

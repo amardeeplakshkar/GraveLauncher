@@ -50,13 +50,13 @@ if [[ -n "$CARGO_PACKAGER_SIGN_PRIVATE_KEY" ]]; then
     \"downloads\": {
         \"x86_64\": {
             \"executable\": {
-                \"download\": \"https://github.com/amardeeplakshkar/PandoraLauncher/releases/download/v$version/GraveLauncher-Linux-x86_64-Portable\",
+                \"download\": \"https://github.com/amardeeplakshkar/GraveLauncher/releases/download/v$version/GraveLauncher-Linux-x86_64-Portable\",
                 \"size\": $(wc -c < dist/GraveLauncher-Linux-x86_64-Portable),
                 \"sha1\": \"$(sha1sum dist/GraveLauncher-Linux-x86_64-Portable | cut -d ' ' -f 1)\",
                 \"sig\": \"$(cat dist/GraveLauncher-Linux-x86_64-Portable.sig)\"
             },
             \"appimage\": {
-                \"download\": \"https://github.com/amardeeplakshkar/PandoraLauncher/releases/download/v$version/GraveLauncher-Linux-x86_64.AppImage\",
+                \"download\": \"https://github.com/amardeeplakshkar/GraveLauncher/releases/download/v$version/GraveLauncher-Linux-x86_64.AppImage\",
                 \"size\": $(wc -c < dist/GraveLauncher-Linux-x86_64.AppImage),
                 \"sha1\": \"$(sha1sum dist/GraveLauncher-Linux-x86_64.AppImage | cut -d ' ' -f 1)\",
                 \"sig\": \"$(cat dist/GraveLauncher-Linux-x86_64.AppImage.sig)\"

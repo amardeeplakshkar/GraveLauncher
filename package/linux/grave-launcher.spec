@@ -10,7 +10,7 @@ Version:        %{_gl_version}
 Release:        1
 Summary:        A modern Minecraft launcher
 License:        MIT
-URL:            https://github.com/amardeeplakshkar/PandoraLauncher
+URL:            https://github.com/amardeeplakshkar/GraveLauncher
 ExclusiveArch:  x86_64
 
 %description

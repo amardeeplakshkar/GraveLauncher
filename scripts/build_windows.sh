@@ -40,7 +40,7 @@ if [[ -n "$CARGO_PACKAGER_SIGN_PRIVATE_KEY" ]]; then
     \"downloads\": {
         \"x86_64\": {
             \"executable\": {
-                \"download\": \"https://github.com/amardeeplakshkar/PandoraLauncher/releases/download/v$version/GraveLauncher-Windows-x86_64-Portable.exe\",
+                \"download\": \"https://github.com/amardeeplakshkar/GraveLauncher/releases/download/v$version/GraveLauncher-Windows-x86_64-Portable.exe\",
                 \"size\": $(wc -c < dist/GraveLauncher-Windows-x86_64-Portable.exe),
                 \"sha1\": \"$(sha1sum dist/GraveLauncher-Windows-x86_64-Portable.exe | cut -d ' ' -f 1)\",
                 \"sig\": \"$(cat dist/GraveLauncher-Windows-x86_64-Portable.exe.sig)\"

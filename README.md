@@ -20,7 +20,7 @@ Work in progress
 
 ### Where can I suggest a feature/report a bug?
 
-Please use [GitHub issues](https://github.com/amardeeplakshkar/PandoraLauncher/issues) on this repository.
+Please use [GitHub issues](https://github.com/amardeeplakshkar/GraveLauncher/issues) on this repository.
 
 ### Why should I use GraveLauncher over other launchers?
 
@@ -36,7 +36,7 @@ Unlikely, for a few reasons:
 - I personally dislike advertisements.
 
 ## Instance Page
-![Instance Page](https://raw.githubusercontent.com/amardeeplakshkar/PandoraLauncher/refs/heads/master/screenshots/instance.png)
+![Instance Page](https://raw.githubusercontent.com/amardeeplakshkar/GraveLauncher/refs/heads/master/screenshots/instance.png)
 
 ## Credits
 

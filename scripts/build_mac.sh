@@ -49,13 +49,13 @@ if [[ -n "$CARGO_PACKAGER_SIGN_PRIVATE_KEY" ]]; then
     \"downloads\": {
         \"universal\": {
             \"executable\": {
-                \"download\": \"https://github.com/amardeeplakshkar/PandoraLauncher/releases/download/v$version/GraveLauncher-macOS-Universal-Portable\",
+                \"download\": \"https://github.com/amardeeplakshkar/GraveLauncher/releases/download/v$version/GraveLauncher-macOS-Universal-Portable\",
                 \"size\": $(wc -c < dist/GraveLauncher-macOS-Universal-Portable),
                 \"sha1\": \"$(sha1sum dist/GraveLauncher-macOS-Universal-Portable | cut -d ' ' -f 1)\",
                 \"sig\": \"$(cat dist/GraveLauncher-macOS-Universal-Portable.sig)\"
             },
             \"app\": {
-                \"download\": \"https://github.com/amardeeplakshkar/PandoraLauncher/releases/download/v$version/GraveLauncher.app.tar.gz\",
+                \"download\": \"https://github.com/amardeeplakshkar/GraveLauncher/releases/download/v$version/GraveLauncher.app.tar.gz\",
                 \"size\": $(wc -c < dist/GraveLauncher.app.tar.gz),
                 \"sha1\": \"$(sha1sum dist/GraveLauncher.app.tar.gz | cut -d ' ' -f 1)\",
                 \"sig\": \"$(cat dist/GraveLauncher.app.tar.gz.sig)\"
