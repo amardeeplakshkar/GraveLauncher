@@ -24,7 +24,7 @@ use ustr::Ustr;
 use uuid::Uuid;
 
 use crate::{
-    account::{BackendAccountInfo, MinecraftLoginInfo}, curseforge_manual_download::ManualCurseforgeDownloadSession, directories::LauncherDirectories, id_slab::IdSlab, instance::Instance, launch::Launcher, metadata::{items::{CurseforgeGetFilesMetadataItem, CurseforgeProjectItem, MinecraftVersionManifestMetadataItem}, manager::MetadataManager}, mod_metadata::ModMetadataManager, persistent::Persistent, server_list_pinger::ServerListPinger, skin_manager::SkinManager
+    account::{BackendAccount, BackendAccountInfo, DEFAULT_OFFLINE_USERNAME, MinecraftLoginInfo, offline_uuid_for_name}, curseforge_manual_download::ManualCurseforgeDownloadSession, directories::LauncherDirectories, id_slab::IdSlab, instance::Instance, launch::Launcher, metadata::{items::{CurseforgeGetFilesMetadataItem, CurseforgeProjectItem, MinecraftVersionManifestMetadataItem}, manager::MetadataManager}, mod_metadata::ModMetadataManager, persistent::Persistent, server_list_pinger::ServerListPinger, skin_manager::SkinManager
 };
 
 #[derive(Clone)]
@@ -1424,7 +1424,41 @@ impl BackendState {
     pub async fn get_login_info(&self, modal_action: &ModalAction, instance_account: Option<Uuid>) -> Option<MinecraftLoginInfo> {
         let selected_account_with_name = {
             let mut account_info = self.account_info.write();
+
+            // Offline-first: if no usable account is selected, fall back to an existing
+            // offline account, or create a default offline account, instead of forcing
+            // a Microsoft (premium) login.
+            let has_valid_selection = {
+                let info = account_info.get();
+                instance_account.or(info.selected_account).is_some_and(|uuid| info.accounts.contains_key(&uuid))
+            };
+            if !has_valid_selection {
+                let existing_offline = account_info.get().accounts.iter()
+                    .find(|(_, account)| account.offline)
+                    .map(|(uuid, _)| *uuid);
+                let has_any_account = !account_info.get().accounts.is_empty();
+
+                if let Some(uuid) = existing_offline {
+                    account_info.modify(|info| info.selected_account = Some(uuid));
+                } else if !has_any_account {
+                    let uuid = offline_uuid_for_name(DEFAULT_OFFLINE_USERNAME);
+                    account_info.modify(|info| {
+                        info.accounts.insert(uuid, BackendAccount {
+                            username: DEFAULT_OFFLINE_USERNAME.into(),
+                            offline: true,
+                            head: None,
+                        });
+                        info.selected_account = Some(uuid);
+                    });
+                    self.send.send_info(format!(
+                        "No account found, launching with offline account \"{}\". You can rename it or add another offline account from the accounts menu.",
+                        DEFAULT_OFFLINE_USERNAME
+                    ));
+                }
+            }
+
             let account_info = account_info.get();
+            let instance_account = instance_account.filter(|uuid| account_info.accounts.contains_key(uuid));
 
             if let Some(uuid) = instance_account.or(account_info.selected_account) {
                 if let Some(account) = account_info.accounts.get(&uuid) {

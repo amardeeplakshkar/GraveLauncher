@@ -57,3 +57,15 @@ impl BackendAccount {
         }
     }
 }
+
+/// Username used for the default offline account that is created automatically
+/// when the user launches the game without having added any account.
+pub const DEFAULT_OFFLINE_USERNAME: &str = "Player";
+
+/// Generate a random version-3 style UUID for an offline account
+/// (matches what the frontend does when adding an offline account).
+pub fn offline_uuid_for_name(_name: &str) -> Uuid {
+    let uuid: u128 = rand::random();
+    let uuid = (uuid & !0xF0000000000000000000) | 0x30000000000000000000; // set version to 3
+    Uuid::from_u128(uuid)
+}
