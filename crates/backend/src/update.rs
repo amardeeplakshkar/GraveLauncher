@@ -111,6 +111,11 @@ fn determine_update_install_type() -> Option<UpdateInstallType> {
 
     let current_exe = std::env::current_exe().ok()?;
 
+    // Installed by a system package manager (rpm/deb under /usr): updates come from the package manager, not self-replacement
+    if cfg!(target_os = "linux") && current_exe.starts_with("/usr/") {
+        return None;
+    }
+
     if cfg!(target_os = "macos") && let Some(app) = determine_macos_app_path(&current_exe) {
         return Some(UpdateInstallType::App(app.to_path_buf()));
     }

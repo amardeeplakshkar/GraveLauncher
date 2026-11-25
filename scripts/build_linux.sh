@@ -9,7 +9,7 @@ fi
 version=${1#v}
 export GRAVE_RELEASE_VERSION=$version
 
-sudo apt-get update --yes && sudo apt-get install --yes libssl-dev libdbus-1-dev libx11-xcb1 libxkbcommon-x11-dev pkg-config libseccomp-dev libfontconfig-dev libudev-dev
+sudo apt-get update --yes && sudo apt-get install --yes libssl-dev libdbus-1-dev libx11-xcb1 libxkbcommon-x11-dev pkg-config libseccomp-dev libfontconfig-dev libudev-dev rpm
 cargo build --release --frozen --target x86_64-unknown-linux-gnu
 strip target/x86_64-unknown-linux-gnu/release/grave_launcher
 mkdir -p dist
@@ -28,6 +28,15 @@ env -u CARGO_PACKAGER_SIGN_PRIVATE_KEY cargo packager --config '{'\
 '  "binaries": [{ "path": "GraveLauncher-Linux-x86_64", "main": true }],'\
 '  "icons": ["package/windows_icons/icon_16x16.png", "package/windows_icons/icon_32x32.png", "package/windows_icons/icon_48x48.png", "package/windows_icons/icon_256x256.png"]'\
 '}'
+
+# RPM package (Fedora/openSUSE/RHEL-family). RPM versions can't contain '-', so pre-release tags use '~'.
+rpm_version=${version//-/\~}
+rpmbuild -bb package/linux/grave-launcher.spec \
+    --define "_topdir $PWD/target/rpmbuild" \
+    --define "_gl_version $rpm_version" \
+    --define "_gl_root $PWD" \
+    --define "_gl_binary $PWD/dist/GraveLauncher-Linux-x86_64"
+mv -f target/rpmbuild/RPMS/x86_64/grave-launcher-*.rpm dist/GraveLauncher-Linux-x86_64.rpm
 
 mv -f dist/GraveLauncher-Linux-x86_64 dist/GraveLauncher-Linux-x86_64-Portable
 mv -f 'dist/GraveLauncher-Linux-x86_64_'$version'_x86_64.AppImage' dist/GraveLauncher-Linux-x86_64.AppImage

@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Game;LauncherStore;GameTool
+Exec=grave-launcher
+Icon=io.github.amardeeplakshkar.GraveLauncher
+Name=GraveLauncher
+Comment=A modern Minecraft launcher
+Terminal=false
+Type=Application
+Keywords=Games;Minecraft;ModManager;Launcher;RustLang
+StartupWMClass=GraveLauncher
