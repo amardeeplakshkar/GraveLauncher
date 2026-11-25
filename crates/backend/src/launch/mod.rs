@@ -2277,9 +2277,9 @@ impl LaunchContext {
                 #[cfg(target_os = "linux")]
                 sandbox_dir: self.sandbox_dir.clone(),
                 #[cfg(windows)]
-                name: Arc::from(OsStr::new("PandoraInstanceSandbox")),
+                name: Arc::from(OsStr::new("GraveLauncherInstanceSandbox")),
                 #[cfg(windows)]
-                description: Arc::from(OsStr::new("Sandbox for Minecraft instances run by Pandora Launcher")),
+                description: Arc::from(OsStr::new("Sandbox for Minecraft instances run by GraveLauncher")),
                 #[cfg(windows)]
                 self_elevate_for_acl_arg: Some(PandoraArg::from(OsStr::new("--internal-set-traverse-acls"))),
                 #[cfg(windows)]
@@ -2407,7 +2407,7 @@ impl LaunchContext {
             } else {
                 panic!("Unsupported platform")
             },
-            ArgumentExpansionKey::LauncherName => OsStr::new("PandoraLauncher").into(),
+            ArgumentExpansionKey::LauncherName => OsStr::new("GraveLauncher").into(),
             ArgumentExpansionKey::LauncherVersion => OsStr::new("1.0.0").into(),
             ArgumentExpansionKey::Classpath => std::env::join_paths(&self.classpath).unwrap().into(),
             ArgumentExpansionKey::AuthPlayerName => OsStr::new(&*self.login_info.username).into(),

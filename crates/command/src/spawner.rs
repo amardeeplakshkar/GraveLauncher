@@ -46,7 +46,7 @@ pub fn spawn(command: PandoraCommand, spawn_type: SpawnType) -> tokio::sync::one
         let (send, recv) = mpsc::channel::<SpawnInfo>();
 
         std::thread::Builder::new()
-            .name("Pandora Command Spawner".to_string())
+            .name("GraveLauncher Command Spawner".to_string())
             .stack_size(128 * 1024)
             .spawn(|| {
                 let mut context = SpawnContext::default();

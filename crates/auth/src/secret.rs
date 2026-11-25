@@ -95,7 +95,7 @@ mod inner {
 
         pub async fn read_credentials(&self, uuid: Uuid) -> Result<Option<AccountCredentials>, SecretStorageError> {
             let uuid_str = uuid.as_hyphenated().to_string();
-            let attributes = &[("service", "pandora-launcher"), ("uuid", uuid_str.as_str())];
+            let attributes = &[("service", "grave-launcher"), ("uuid", uuid_str.as_str())];
             let Some(secret) = read(self, attributes).await? else {
                 return Ok(None);
             };
@@ -108,23 +108,23 @@ mod inner {
             credentials: &AccountCredentials,
         ) -> Result<(), SecretStorageError> {
             let uuid_str = uuid.as_hyphenated().to_string();
-            let attributes = &[("service", "pandora-launcher"), ("uuid", uuid_str.as_str())];
+            let attributes = &[("service", "grave-launcher"), ("uuid", uuid_str.as_str())];
 
             let bytes = serde_json::to_vec(credentials).map_err(|_| SecretStorageError::SerializationError)?;
 
-            write(self, "Pandora Minecraft Account", attributes, &bytes).await
+            write(self, "GraveLauncher Minecraft Account", attributes, &bytes).await
         }
 
         pub async fn delete_credentials(&self, uuid: Uuid) -> Result<(), SecretStorageError> {
             let uuid_str = uuid.as_hyphenated().to_string();
-            let attributes = &[("service", "pandora-launcher"), ("uuid", uuid_str.as_str())];
+            let attributes = &[("service", "grave-launcher"), ("uuid", uuid_str.as_str())];
 
             delete(self, attributes).await?;
             Ok(())
         }
 
         pub async fn read_proxy_password(&self) -> Result<Option<String>, SecretStorageError> {
-            let attributes = &[("service", "pandora-launcher"), ("type", "proxy-password")];
+            let attributes = &[("service", "grave-launcher"), ("type", "proxy-password")];
             let Some(secret) = read(self, attributes).await? else {
                 return Ok(None);
             };
@@ -132,12 +132,12 @@ mod inner {
         }
 
         pub async fn write_proxy_password(&self, password: &str) -> Result<(), SecretStorageError> {
-            let attributes = &[("service", "pandora-launcher"), ("type", "proxy-password")];
-            write(self, "Pandora Proxy Password", attributes, password.as_bytes()).await
+            let attributes = &[("service", "grave-launcher"), ("type", "proxy-password")];
+            write(self, "GraveLauncher Proxy Password", attributes, password.as_bytes()).await
         }
 
         pub async fn delete_proxy_password(&self) -> Result<(), SecretStorageError> {
-            let attributes = &[("service", "pandora-launcher"), ("type", "proxy-password")];
+            let attributes = &[("service", "grave-launcher"), ("type", "proxy-password")];
             delete(self, attributes).await
         }
     }
@@ -251,17 +251,17 @@ mod inner {
         }
 
         pub async fn read_credentials(&self, uuid: Uuid) -> Result<Option<AccountCredentials>, SecretStorageError> {
-            let target_name = format!("PandoraLauncher_MinecraftAccount_{}", uuid.as_hyphenated());
+            let target_name = format!("GraveLauncher_MinecraftAccount_{}", uuid.as_hyphenated());
 
             let mut account = AccountCredentials::default();
 
             let uuid = uuid.as_hyphenated();
-            account.msa_refresh = read_deserialize(&format!("PandoraLauncher_MsaRefresh_{}", uuid))?;
-            account.msa_refresh_force_client_id = read_deserialize(&format!("PandoraLauncher_MsaRefreshForceClientId_{}", uuid))?;
-            account.msa_access = read_deserialize(&format!("PandoraLauncher_MsaAccess_{}", uuid))?;
-            account.xbl = read_deserialize(&format!("PandoraLauncher_Xbl_{}", uuid))?;
-            account.xsts = read_deserialize(&format!("PandoraLauncher_Xsts_{}", uuid))?;
-            account.access_token = read_deserialize(&format!("PandoraLauncher_AccessToken_{}", uuid))?;
+            account.msa_refresh = read_deserialize(&format!("GraveLauncher_MsaRefresh_{}", uuid))?;
+            account.msa_refresh_force_client_id = read_deserialize(&format!("GraveLauncher_MsaRefreshForceClientId_{}", uuid))?;
+            account.msa_access = read_deserialize(&format!("GraveLauncher_MsaAccess_{}", uuid))?;
+            account.xbl = read_deserialize(&format!("GraveLauncher_Xbl_{}", uuid))?;
+            account.xsts = read_deserialize(&format!("GraveLauncher_Xsts_{}", uuid))?;
+            account.access_token = read_deserialize(&format!("GraveLauncher_AccessToken_{}", uuid))?;
 
             Ok(Some(account))
         }
@@ -272,12 +272,12 @@ mod inner {
             credentials: &AccountCredentials,
         ) -> Result<(), SecretStorageError> {
             let uuid = uuid.as_hyphenated();
-            write_serialize(&format!("PandoraLauncher_MsaRefresh_{}", uuid), credentials.msa_refresh.as_ref())?;
-            write_serialize(&format!("PandoraLauncher_MsaRefreshForceClientId_{}", uuid), credentials.msa_refresh_force_client_id.as_ref())?;
-            write_serialize(&format!("PandoraLauncher_MsaAccess_{}", uuid), credentials.msa_access.as_ref())?;
-            write_serialize(&format!("PandoraLauncher_Xbl_{}", uuid), credentials.xbl.as_ref())?;
-            write_serialize(&format!("PandoraLauncher_Xsts_{}", uuid), credentials.xsts.as_ref())?;
-            write_serialize(&format!("PandoraLauncher_AccessToken_{}", uuid), credentials.access_token.as_ref())?;
+            write_serialize(&format!("GraveLauncher_MsaRefresh_{}", uuid), credentials.msa_refresh.as_ref())?;
+            write_serialize(&format!("GraveLauncher_MsaRefreshForceClientId_{}", uuid), credentials.msa_refresh_force_client_id.as_ref())?;
+            write_serialize(&format!("GraveLauncher_MsaAccess_{}", uuid), credentials.msa_access.as_ref())?;
+            write_serialize(&format!("GraveLauncher_Xbl_{}", uuid), credentials.xbl.as_ref())?;
+            write_serialize(&format!("GraveLauncher_Xsts_{}", uuid), credentials.xsts.as_ref())?;
+            write_serialize(&format!("GraveLauncher_AccessToken_{}", uuid), credentials.access_token.as_ref())?;
 
             Ok(())
         }
@@ -285,30 +285,30 @@ mod inner {
         pub async fn delete_credentials(&self, uuid: Uuid) -> Result<(), SecretStorageError> {
             let uuid = uuid.as_hyphenated();
             [
-                delete(&format!("PandoraLauncher_MsaRefresh_{}", uuid)),
-                delete(&format!("PandoraLauncher_MsaRefreshForceClientId_{}", uuid)),
-                delete(&format!("PandoraLauncher_MsaAccess_{}", uuid)),
-                delete(&format!("PandoraLauncher_Xbl_{}", uuid)),
-                delete(&format!("PandoraLauncher_Xsts_{}", uuid)),
-                delete(&format!("PandoraLauncher_AccessToken_{}", uuid)),
+                delete(&format!("GraveLauncher_MsaRefresh_{}", uuid)),
+                delete(&format!("GraveLauncher_MsaRefreshForceClientId_{}", uuid)),
+                delete(&format!("GraveLauncher_MsaAccess_{}", uuid)),
+                delete(&format!("GraveLauncher_Xbl_{}", uuid)),
+                delete(&format!("GraveLauncher_Xsts_{}", uuid)),
+                delete(&format!("GraveLauncher_AccessToken_{}", uuid)),
             ].into_iter().collect::<Result<(), _>>()?;
 
             Ok(())
         }
 
         pub async fn read_proxy_password(&self) -> Result<Option<String>, SecretStorageError> {
-            let Some(bytes) = read("PandoraLauncher_ProxyPassword")? else {
+            let Some(bytes) = read("GraveLauncher_ProxyPassword")? else {
                 return Ok(None);
             };
             Ok(Some(String::from_utf8(bytes).map_err(|_| SecretStorageError::SerializationError)?))
         }
 
         pub async fn write_proxy_password(&self, password: &str) -> Result<(), SecretStorageError> {
-            write("PandoraLauncher_ProxyPassword", Some(password.as_bytes().to_vec()))
+            write("GraveLauncher_ProxyPassword", Some(password.as_bytes().to_vec()))
         }
 
         pub async fn delete_proxy_password(&self) -> Result<(), SecretStorageError> {
-            delete("PandoraLauncher_ProxyPassword")
+            delete("GraveLauncher_ProxyPassword")
         }
     }
 }
@@ -325,7 +325,7 @@ mod inner {
     }
 
     fn read(storage: &PlatformSecretStorage, target: &str) -> Result<Option<Vec<u8>>, SecretStorageError> {
-        let data = match storage.keychain.find_generic_password("com.moulberry.pandoralauncher", target) {
+        let data = match storage.keychain.find_generic_password("io.github.amardeeplakshkar.gravelauncher", target) {
             Ok((data, _)) => data,
             Err(error) if error.code() == security_framework_sys::base::errSecItemNotFound => {
                 return Ok(None);
@@ -345,7 +345,7 @@ mod inner {
     }
 
     fn write(storage: &PlatformSecretStorage, target: &str, bytes: &[u8]) -> Result<(), SecretStorageError> {
-        storage.keychain.set_generic_password("com.moulberry.pandoralauncher", target, bytes)?;
+        storage.keychain.set_generic_password("io.github.amardeeplakshkar.gravelauncher", target, bytes)?;
         Ok(())
     }
 
@@ -355,7 +355,7 @@ mod inner {
     }
 
     fn delete(storage: &PlatformSecretStorage, target: &str) -> Result<(), SecretStorageError> {
-        let item = match storage.keychain.find_generic_password("com.moulberry.pandoralauncher", target) {
+        let item = match storage.keychain.find_generic_password("io.github.amardeeplakshkar.gravelauncher", target) {
             Ok((_, item)) => item,
             Err(error) if error.code() == security_framework_sys::base::errSecItemNotFound => {
                 return Ok(());

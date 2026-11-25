@@ -50,7 +50,7 @@ fn main() {
         base_dirs.data_dir().into()
     };
 
-    let launcher_dir = data_dir.join("PandoraLauncher");
+    let launcher_dir = data_dir.join("GraveLauncher");
     _ = std::fs::create_dir_all(&launcher_dir);
     _ = std::env::set_current_dir(&launcher_dir);
 
@@ -82,7 +82,7 @@ fn main() {
         #[cfg(unix)]
         let bind = PlatformListener::bind(&socket);
         #[cfg(windows)]
-        let bind = PlatformListener::bind(std::ffi::OsStr::new("pandora-launcher-socket"));
+        let bind = PlatformListener::bind(std::ffi::OsStr::new("grave-launcher-socket"));
 
         let mut listener = match bind {
             Ok(listener) => listener,
@@ -205,7 +205,7 @@ fn main() {
             #[cfg(unix)]
             let connect = PlatformClientStream::connect(&socket).await;
             #[cfg(windows)]
-            let connect = PlatformClientStream::connect(std::ffi::OsStr::new("pandora-launcher-socket")).await;
+            let connect = PlatformClientStream::connect(std::ffi::OsStr::new("grave-launcher-socket")).await;
 
             let mut conn = match connect {
                 Ok(conn) => conn,
@@ -455,7 +455,7 @@ fn start_deadlock_detection(deadlock_message: &Arc<parking_lot::lock_api::RwLock
 
 fn init_logging(level: log::LevelFilter, log_file: &Path) -> Result<(), fern::InitError> {
     let base_config = fern::Dispatch::new()
-        .level_for("pandora_launcher", level)
+        .level_for("grave_launcher", level)
         .level_for("auth", level)
         .level_for("backend", level)
         .level_for("frontend", level)

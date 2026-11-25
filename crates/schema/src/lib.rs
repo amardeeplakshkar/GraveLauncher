@@ -30,10 +30,10 @@ pub mod version;
 pub mod version_manifest;
 
 pub static USER_AGENT: Lazy<String> = Lazy::new(|| {
-    if let Some(version) = option_env!("PANDORA_RELEASE_VERSION") {
-        format!("PandoraLauncher/{version} (https://github.com/Moulberry/PandoraLauncher)")
+    if let Some(version) = option_env!("GRAVE_RELEASE_VERSION") {
+        format!("GraveLauncher/{version} (https://github.com/amardeeplakshkar/PandoraLauncher)")
     } else {
-        "PandoraLauncher/dev (https://github.com/Moulberry/PandoraLauncher)".to_string()
+        "GraveLauncher/dev (https://github.com/amardeeplakshkar/PandoraLauncher)".to_string()
     }
 });
 

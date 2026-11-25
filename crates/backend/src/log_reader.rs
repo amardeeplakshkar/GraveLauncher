@@ -100,7 +100,7 @@ pub fn start_game_output(stdout: PipeReader, stderr: Option<PipeReader>) -> toki
                         },
                     };
 
-                    let panic_message = format!("(Pandora) There was an error while reading the log: {panic_error_str}");
+                    let panic_message = format!("(GraveLauncher) There was an error while reading the log: {panic_error_str}");
 
                     _ = sender.send(GameOutputMsg {
                         time: Utc::now().timestamp_millis(),
@@ -119,7 +119,7 @@ pub fn start_game_output(stdout: PipeReader, stderr: Option<PipeReader>) -> toki
         }
 
         if let Err(error) = result {
-            let error_message = format!("(Pandora) There was an error while reading the log: {error}");
+            let error_message = format!("(GraveLauncher) There was an error while reading the log: {error}");
 
             _ = sender.send(GameOutputMsg {
                 time: Utc::now().timestamp_millis(),
