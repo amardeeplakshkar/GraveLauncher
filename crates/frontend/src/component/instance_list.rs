@@ -114,7 +114,7 @@ impl InstanceList {
             by_group.sort_by_cached_key(|group_name, _| if let Some(group_name) = group_name {
                 ordering.iter().position(|ordering_name| ordering_name == group_name).map(|v| v+1).unwrap_or(0)
             } else {
-                std::usize::MAX
+                usize::MAX
             });
 
             if size_without_no_group == 1 {

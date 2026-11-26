@@ -598,7 +598,7 @@ dependencies = [
 
 [[package]]
 name = "auth"
-version = "5.3.1"
+version = "5.3.2"
 dependencies = [
  "chrono",
  "httparse",
@@ -692,7 +692,7 @@ dependencies = [
 
 [[package]]
 name = "backend"
-version = "5.3.1"
+version = "5.3.2"
 dependencies = [
  "anyhow",
  "auth",
@@ -947,7 +947,7 @@ dependencies = [
 
 [[package]]
 name = "bridge"
-version = "5.3.1"
+version = "5.3.2"
 dependencies = [
  "atomic-time",
  "atomic_enum",
@@ -1387,7 +1387,7 @@ dependencies = [
 
 [[package]]
 name = "command"
-version = "5.3.1"
+version = "5.3.2"
 dependencies = [
  "directories",
  "junction",
@@ -2616,7 +2616,7 @@ dependencies = [
 
 [[package]]
 name = "frontend"
-version = "5.3.1"
+version = "5.3.2"
 dependencies = [
  "anyhow",
  "atomic-time",
@@ -3408,6 +3408,27 @@ checksum = "d03f81ad4732830d85cfd417a9f62cde6dadda4354d37d078a6084a19560aa2d"
 dependencies = [
  "arraydeque",
  "smallvec",
+]
+
+[[package]]
+name = "grave_launcher"
+version = "5.3.2"
+dependencies = [
+ "backend",
+ "backtrace",
+ "bridge",
+ "clap",
+ "command",
+ "directories",
+ "fern",
+ "frontend",
+ "humantime",
+ "log",
+ "native-dialog",
+ "parking_lot",
+ "tokio",
+ "tokio-util",
+ "winresource",
 ]
 
 [[package]]
@@ -5006,7 +5027,7 @@ dependencies = [
 
 [[package]]
 name = "nbt"
-version = "5.3.1"
+version = "5.3.2"
 dependencies = [
  "anyhow",
  "byteorder",
@@ -5894,27 +5915,6 @@ dependencies = [
  "proc-macro2",
  "quote",
  "syn 2.0.119",
-]
-
-[[package]]
-name = "grave_launcher"
-version = "5.3.1"
-dependencies = [
- "backend",
- "backtrace",
- "bridge",
- "clap",
- "command",
- "directories",
- "fern",
- "frontend",
- "humantime",
- "log",
- "native-dialog",
- "parking_lot",
- "tokio",
- "tokio-util",
- "winresource",
 ]
 
 [[package]]
@@ -7319,7 +7319,7 @@ dependencies = [
 
 [[package]]
 name = "schema"
-version = "5.3.1"
+version = "5.3.2"
 dependencies = [
  "chrono",
  "enum-map",
@@ -8263,7 +8263,7 @@ dependencies = [
 
 [[package]]
 name = "t"
-version = "5.3.1"
+version = "5.3.2"
 dependencies = [
  "indexmap 2.14.0",
  "serde",
