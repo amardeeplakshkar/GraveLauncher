@@ -755,7 +755,7 @@ impl Render for LauncherUI {
             .w_full()
             .justify_center()
             .text_size(rems(0.9375))
-            .child(Icon::new(PandoraIcon::Pandora).size_8().min_w_8().min_h_8())
+            .child(gpui::img(ImageSource::Resource(Resource::Embedded("icons/grave.svg".into()))).size_8().min_w_8().min_h_8())
             .when(!iconized_sidebar, |this| this.child(t::common::app_name()));
         let footer_buttons = h_flex()
             .when(iconized_sidebar, |this| this.flex_col())
